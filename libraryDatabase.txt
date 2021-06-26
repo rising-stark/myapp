@@ -1,0 +1,23 @@
+DROP DATABSE library;
+CREATE DATABASE library;
+USE library;
+
+CREATE TABLE books(
+book_id INT AUTO_INCREMENT PRIMARY KEY,
+book_title VARCHAR(100) NOT NULL,
+book_pages INT NOT NULL,
+book_year_published INT(4) NOT NULL
+);
+
+CREATE TABLE authors(
+author_id INT AUTO_INCREMENT PRIMARY KEY,
+author_first_name VARCHAR(100) NOT NULL,
+author_last_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE books_authors(
+book_id INT NOT NULL,
+author_id INT NOT NULL,
+FOREIGN KEY (book_id) REFERENCES books(book_id) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (author_id) REFERENCES authors(author_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
