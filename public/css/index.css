@@ -22,6 +22,11 @@
 	padding-top:10px;
 }
 
+#showbook #no-book{
+	display: none;
+	
+}
+
 .table-responsive {
 	max-height:200px;
 }

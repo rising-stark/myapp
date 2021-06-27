@@ -59,4 +59,13 @@ class BookController extends Controller
 			return back()->with('book-added', 'Book has been added successfully');
 		}
 	}
+	
+	public function deleteBook(Request $request){
+		try{
+			DB::table('books_authors')->where(['book_title' => $request->book_title, 'author_name' => $request->author_name])->delete();
+			return 1;
+		}catch(Exception $e){
+			return 0;
+		}
+	}
 }
