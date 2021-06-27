@@ -1,3 +1,13 @@
+.alert{
+	position: absolute;
+	top: 100px;
+	left: 25%;
+	width: 50%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	z-index: 2;
+}
 .card-header, .form-group{
 	display:flex;
 	flex-direction: row;
@@ -8,10 +18,10 @@
 	width: 40%;
 }
 
-.form-group input{
-	margin-bottom: 15px;
+#showbook{
+	padding-top:10px;
 }
 
-.form-group button{
-	margin-top: 10px;
+.table-responsive {
+    max-height:200px;
 }
