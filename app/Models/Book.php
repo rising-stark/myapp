@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Book
  * 
- * @property int $book_id
  * @property string $book_title
  * @property int $book_pages
  * @property int $book_year_published
@@ -24,7 +23,9 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
 	protected $table = 'books';
-	protected $primaryKey = 'book_id';
+	protected $primaryKey = 'book_title';
+	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
@@ -33,13 +34,12 @@ class Book extends Model
 	];
 
 	protected $fillable = [
-		'book_title',
 		'book_pages',
 		'book_year_published'
 	];
 
 	public function authors()
 	{
-		return $this->belongsToMany(Author::class, 'books_authors');
+		return $this->belongsToMany(Author::class, 'books_authors', 'book_title', 'author_name');
 	}
 }

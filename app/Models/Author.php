@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Author
  * 
- * @property int $author_id
- * @property string $author_first_name
- * @property string $author_last_name
+ * @property string $author_name
  * 
  * @property Collection|Book[] $books
  *
@@ -23,16 +21,17 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
 	protected $table = 'authors';
-	protected $primaryKey = 'author_id';
+	protected $primaryKey = 'author_name';
+	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $fillable = [
-		'author_first_name',
-		'author_last_name'
+		'author_name'
 	];
 
 	public function books()
 	{
-		return $this->belongsToMany(Book::class, 'books_authors');
+		return $this->belongsToMany(Book::class, 'books_authors', 'author_name', 'book_title');
 	}
 }

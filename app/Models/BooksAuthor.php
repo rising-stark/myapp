@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class BooksAuthor
  * 
- * @property int $book_id
- * @property int $author_id
+ * @property string $book_title
+ * @property string $author_name
  * 
  * @property Book $book
  * @property Author $author
@@ -25,23 +25,18 @@ class BooksAuthor extends Model
 	public $incrementing = false;
 	public $timestamps = false;
 
-	protected $casts = [
-		'book_id' => 'int',
-		'author_id' => 'int'
-	];
-
 	protected $fillable = [
-		'book_id',
-		'author_id'
+		'book_title',
+		'author_name'
 	];
 
 	public function book()
 	{
-		return $this->belongsTo(Book::class);
+		return $this->belongsTo(Book::class, 'book_title');
 	}
 
 	public function author()
 	{
-		return $this->belongsTo(Author::class);
+		return $this->belongsTo(Author::class, 'author_name');
 	}
 }
