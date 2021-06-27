@@ -3,8 +3,8 @@ $(document).ready(function() {
 		columnDefs: [{
 			orderable: false,
 			targets: 5
-		}],
-		columnDefs: [{
+		},
+		{
 			searchable: false,
 			targets: [0, 3, 4, 5]
 		}]
