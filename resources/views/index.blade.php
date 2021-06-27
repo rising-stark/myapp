@@ -43,20 +43,20 @@
 							<form method="POST" action="{{route('post.create')}}" autocomplete="on">
 								@csrf
 								<div class="form-group">
-									<label for="book_title">Book Title</label>
+									<label class="control-label" for="book_title">Book Title</label>
 									<input type="text" name="book_title" class="form-control" id="book_title" placeholder="Enter Book Title" required autocomplete="on">
 								</div>
 								<div class="form-group">
-									<label for="author_name">Author's Name</label>
-									<input type="text" name="author_name" class="form-control" id="author_name" placeholder="Enter Author's First Name" required autocomplete="on">
+									<label class="control-label" for="author_name">Author's Name</label>
+									<input type="text" name="author_name" class="form-control" id="author_name" placeholder="Enter Author's Name" required autocomplete="on">
 								</div>
 								<div class="form-group">
-									<label for="book_pages">No. of pages</label>
+									<label class="control-label" for="book_pages">No. of pages</label>
 									<input type="number" name="book_pages" class="form-control" id="book_pages" placeholder="Enter no. of pages"  min="1" max="9999" required autocomplete="on">
 								</div>
 								<div class="form-group">
-									<label for="book_year_published">Year Published</label>
-									<input type="number" name="book_year_published" class="form-control" id="book_year_published" placeholder="Enter year published" min="1000" max="2022" required autocomplete="on">
+									<label class="control-label" for="book_year_published">Year Published</label>
+									<input type="number" name="book_year_published" class="form-control" id="book_year_published" placeholder="Enter year of book published" min="1000" max="2022" required autocomplete="on">
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary">Add Book</button>
@@ -81,7 +81,7 @@
 				</div>
 			@else
 				<div class="row" id="showbook">
-					<div class="col-xs-10 col-md-10 offset-md-1 offset-xs-1">
+					<div class="col-xs-10 col-md-12 col-lg-12 offset-xs-1">
 						<div class="card">
 							<div class="card-header">
 								<h5>All Books</h5>
@@ -107,7 +107,7 @@
 												<td>{{$book->author_name}}</td>
 												<td>{{$book->book_pages}}</td>
 												<td>{{$book->book_year_published}}</td>
-												<td>{{$book->book_title}}</td>
+												<td><button type="button" class="btn btn-warning">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete</button></td>
 											</tr>
 										@endforeach
 									</tbody>
