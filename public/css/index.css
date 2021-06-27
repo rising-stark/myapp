@@ -1,0 +1,17 @@
+.card-header, .form-group{
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.form-group label{
+	width: 40%;
+}
+
+.form-group input{
+	margin-bottom: 15px;
+}
+
+.form-group button{
+	margin-top: 10px;
+}
