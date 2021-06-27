@@ -87,7 +87,7 @@
 								<h5>All Books</h5>
 							</div>
 							<div class="card-body table-responsive">
-								<table class="table table-hover table-bordered">
+								<table class="table table-hover table-bordered" id="sortTable">
 									<thead class="thead-dark">
 										<tr>
 											<th>Sl. No.</th>
@@ -95,7 +95,7 @@
 											<th>Author Name</th>
 											<th>No. of Pages</th>
 											<th>Year Published</th>
-											<th class="no-sort">Options</th>
+											<th>Options</th>
 										</tr>
 									</thead>
 									<tbody>
