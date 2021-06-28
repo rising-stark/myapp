@@ -1,25 +1,10 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Book
- * 
- * @property string $book_title
- * @property int $book_pages
- * @property int $book_year_published
- * 
- * @property Collection|Author[] $authors
- *
- * @package App\Models
- */
 class Book extends Model
 {
 	protected $table = 'books';

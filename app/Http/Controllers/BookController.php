@@ -7,6 +7,8 @@ use App\Models\Book;
 use App\Models\Author;
 use App\Models\BooksAuthor;
 use Illuminate\Http\Request;
+use App\Exports\BookExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -71,10 +73,33 @@ class BookController extends Controller
 
 	public function updateAuthor(Request $request){
 		try{
-			error_log("message");
-			error_log($request->author_name);
 			DB::table('authors')->where('author_name', $request->old_author_name)->update(['author_name' => $request->new_author_name]);
 			return 1;
+		}catch(Exception $e){
+			return 0;
+		}
+	}
+
+	public function exportTableCSV(Request $request){
+		try{
+
+			//$export_cols_arr = ;
+			return Excel::download(new BookExport($request->input('cols')), 'books.csv');
+		}catch(Exception $e){
+			return 0;
+		}
+	}
+
+	public function exportTableXML(Request $request){
+		try{
+			//error_log($request);
+			/*$export_type_arr = explode (",", substr($request->export_type, 1, -1));
+			$export_cols_arr = explode (",", substr($request->export_cols, 1, -1));
+			
+			foreach($export_cols_arr as $i){
+				error_log($i);
+			}*/
+			return Excel::download(new BookExport, 'books.xlsx');
 		}catch(Exception $e){
 			return 0;
 		}
