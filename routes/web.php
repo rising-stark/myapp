@@ -13,4 +13,3 @@ Route::post('/ajax-update-author', [AuthorController::class, 'updateAuthor'])->n
 
 Route::post('/ajax-export-table-csv', [BookExportController::class, 'exportTableCSV'])->name('ajax.table.export.csv');
 Route::post('/ajax-export-table-xml', [BookExportController::class, 'exportTableXML'])->name('ajax.table.export.xml');
-Route::post('/ajax-export-table-cur', [BookExportController::class, 'exportTableCUR'])->name('ajax.table.export.cur');

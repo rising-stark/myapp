@@ -113,7 +113,7 @@
 											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 												<button formaction="{{route('ajax.table.export.csv')}}" type="submit" class="dropdown-item btn btn-primary">Export CSV&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
 												<button formaction="{{route('ajax.table.export.xml')}}" type="submit" class="dropdown-item btn btn-primary">Export XML&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
-												<button formaction="{{route('ajax.table.export.cur')}}" type="submit" class="dropdown-item btn btn-primary">Export Current table data&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
+												<button id="exportCurrentTable" class="dropdown-item btn btn-primary">Export Current table data&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
 											</div>
 										</div>
 									</form>

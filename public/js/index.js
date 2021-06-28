@@ -8,25 +8,30 @@ $(document).ready(function() {
 		}
 	});
 	$('#sortTable').DataTable({
+		dom: 'Bfrtip',
 		language: {
 			searchPlaceholder: "Search Book title or Author name"
 		},
 		columnDefs: [{
-			orderable: false,
-			targets: 5
-		},
-		{
-			searchable: false,
-			targets: [0, 3, 4, 5]
-		}]
+				orderable: false,
+				targets: 5
+			},
+			{
+				searchable: false,
+				targets: [0, 3, 4, 5]
+			}
+		],
+		buttons: [
+			'csv', 'excel', 'pdf'
+		]
 	});
 
-	$(".close").click(function(){
+	$(".close").click(function() {
 		$('.alert').hide(500);
 	});
 
-	$(document.body).on('click', '.btn-delete', function(e){
-		if(unsavedChanges > 0){
+	$(document.body).on('click', '.btn-delete', function(e) {
+		if (unsavedChanges > 0) {
 			alert("Cannot Delete a record while there are unsaved changes");
 			return;
 		}
@@ -34,31 +39,31 @@ $(document).ready(function() {
 		var book_title = row.find("td").eq(1).html();
 		var author_name = row.find("td").eq(2).html();
 
-		if(confirm("Are you sure you want to delete the book with Title = "+book_title+" and Author name = "+author_name)){
+		if (confirm("Are you sure you want to delete the book with Title = " + book_title + " and Author name = " + author_name)) {
 			var _token = $("input[name='_token']").val();
 			$.ajax({
 				type: 'POST',
-				url : "ajax-delete-book",
+				url: "ajax-delete-book",
 				data: {
 					_token: _token,
 					book_title: book_title,
 					author_name: author_name
 				},
 				cache: false,
-				success: function(result){
-					if(result == 1){
+				success: function(result) {
+					if (result == 1) {
 						row.remove();
 						var rowCount = $('#sortTable tr').length;
-						if(rowCount == 1){
+						if (rowCount == 1) {
 							var searchTermLength = $('.dataTables_filter input').val().length;
-							if(searchTermLength == 0){
+							if (searchTermLength == 0) {
 								$("#no-book").show();
 								$("#book").hide();
-							}else{
+							} else {
 								//$("#no-book-search").show();								
 							}
 						}
-					}else{
+					} else {
 						alert("Some error occured while deleting this book.");
 					}
 				}
@@ -66,13 +71,13 @@ $(document).ready(function() {
 		}
 	});
 
-	$(document.body).on('click', '.btn-update', function(e){
+	$(document.body).on('click', '.btn-update', function(e) {
 		unsavedChanges++;
 		$("#unsaved").show();
 		var row = $(this).closest("tr");
 		var author_name = row.find("td").eq(2).html();
 
-		var input = $('<input type="text" placeholder="Enter Author&apos;s Name"/><input type="hidden" value="'+author_name+'"/>');
+		var input = $('<input type="text" placeholder="Enter Author&apos;s Name"/><input type="hidden" value="' + author_name + '"/>');
 		input.val(author_name);
 		$(this).closest("tr").find("td").eq(2).html(input);
 		$(this).html("SAVE");
@@ -82,7 +87,7 @@ $(document).ready(function() {
 		$(this).addClass("btn-save");
 	});
 
-	$(document.body).on('click', '.btn-save', function(e){
+	$(document.body).on('click', '.btn-save', function(e) {
 		var btn = $(this);
 		var row = $(this).closest("tr");
 		var book_title = row.find("td").eq(1).html();
@@ -99,8 +104,8 @@ $(document).ready(function() {
 				new_author_name: new_author_name
 			},
 			cache: false,
-			success: function(result){
-				if(result == 1){
+			success: function(result) {
+				if (result == 1) {
 					unsavedChanges--;
 					btn.html("Update");
 					btn.addClass("btn-warning");
@@ -112,13 +117,44 @@ $(document).ready(function() {
 						"message": "Author Name updated successfully.",
 						"priority": 'success'
 					}]);*/
-					if(unsavedChanges == 0){
+					if (unsavedChanges == 0) {
 						$("#unsaved").hide();
 					}
-				}else{
+				} else {
 					alert("Some error occured while updating the author name.");
 				}
 			}
 		});
+	});
+
+	$("#exportCurrentTable").click(function(e) {
+		e.preventDefault();
+		var data = "";
+		var tableData = [];
+		var rows = $("#sortTable tr");
+		rows.each(function(index, row) {
+			var rowData = [];
+			$(row).find("th, td").not(":last").each(function(index, column) {
+				rowData.push(column.innerText);
+			});
+			tableData.push(rowData.join(","));
+		});
+		data += tableData.join("\n");
+
+		/*
+		 * Make CSV downloadable
+		 */
+		var downloadLink = document.createElement("a");
+		var blob = new Blob(["\ufeff", data]);
+		var url = URL.createObjectURL(blob);
+		downloadLink.href = url;
+		downloadLink.download = "Books Info.csv";
+
+		/*
+		 * Actually download CSV
+		 */
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+		document.body.removeChild(downloadLink);
 	});
 });
