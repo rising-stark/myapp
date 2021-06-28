@@ -7,10 +7,13 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Library Management</title>
 
+	<link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 	<link href="{{ asset('css/index.css') }}" rel="stylesheet" type="text/css">
@@ -86,7 +89,35 @@
 					<div class="col-xs-10 col-md-12 col-lg-12 offset-xs-1">
 						<div class="card">
 							<div class="card-header">
-								<h5>All Books <span id="unsaved"><strong class="btn-warning">UNSAVED CHANGES</strong></span></h5>
+								<div class="card-header-div">
+									<h5>
+										All Books
+										<span id="unsaved">
+											<strong class="btn-warning">UNSAVED CHANGES</strong>
+										</span>
+									</h5>
+								</div>
+								<div id="select-div" class="card-header-div">
+									<form method='POST'>
+										@csrf
+										<label for="columns">Choose columns:</label>
+										<select class="form-select" multiple size=2>
+											<option selected value="1">Book Title</option>
+											<option value="2">Author Name</option>
+										</select>
+
+										<div class="dropright">
+											<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    	Choose Export Type
+											</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+												<button formaction="{{route('ajax.table.export.csv')}}" type="submit" class="dropdown-item btn btn-primary">Export CSV&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
+												<button formaction="{{route('ajax.table.export.xml')}}" type="submit" class="dropdown-item btn btn-primary">Export XML&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
+												<button formaction="{{route('ajax.table.export.cur')}}" type="submit" class="dropdown-item btn btn-primary">Export Current table data&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 							<div class="card-body" id="no-book">
 								<h4 class="text-danger text-center"><u>NO BOOKS FOUND!!</u></h4>
