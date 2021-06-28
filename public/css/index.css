@@ -22,9 +22,9 @@
 	padding-top:10px;
 }
 
-#showbook #no-book{
+#showbook #no-book, #no-book-search{
 	display: none;
-	
+
 }
 
 .table-responsive {
@@ -34,4 +34,8 @@
 #addbook .card-body .control-label::after{
 	content:"*";
 	color:red;
+}
+
+#unsaved{
+	display: none;
 }

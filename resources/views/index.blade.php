@@ -3,6 +3,7 @@
 <head>
 	<meta charset = "UTF-8">
 	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+	<meta name="_base_url" content="{{ url('/') }}">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Library Management</title>
 
@@ -85,7 +86,7 @@
 					<div class="col-xs-10 col-md-12 col-lg-12 offset-xs-1">
 						<div class="card">
 							<div class="card-header">
-								<h5>All Books</h5>
+								<h5>All Books <span id="unsaved"><strong class="btn-warning">UNSAVED CHANGES</strong></span></h5>
 							</div>
 							<div class="card-body" id="no-book">
 								<h4 class="text-danger text-center"><u>NO BOOKS FOUND!!</u></h4>
@@ -116,6 +117,9 @@
 										@endforeach
 									</tbody>
 								</table>
+								<div class="card-body" id="no-book-search">
+									<h4 class="text-danger text-center"><u>NO BOOKS FOUND FOR THIS SEARC TERM!!</u></h4>
+								</div>
 							</div>
 						</div>
 					</div>

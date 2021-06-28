@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-	public function addBook(){
+	public function index(){
 		$books = DB::table('books_authors')
 					->join('books', 'books_authors.book_title', '=', 'books.book_title')
 					->join('authors', 'books_authors.author_name', '=', 'authors.author_name')
@@ -59,10 +59,21 @@ class BookController extends Controller
 			return back()->with('book-added', 'Book has been added successfully');
 		}
 	}
-	
+
 	public function deleteBook(Request $request){
 		try{
 			DB::table('books_authors')->where(['book_title' => $request->book_title, 'author_name' => $request->author_name])->delete();
+			return 1;
+		}catch(Exception $e){
+			return 0;
+		}
+	}
+
+	public function updateAuthor(Request $request){
+		try{
+			error_log("message");
+			error_log($request->author_name);
+			DB::table('authors')->where('author_name', $request->old_author_name)->update(['author_name' => $request->new_author_name]);
 			return 1;
 		}catch(Exception $e){
 			return 0;
