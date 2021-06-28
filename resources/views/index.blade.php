@@ -101,9 +101,9 @@
 									<form method='POST'>
 										@csrf
 										<label for="columns">Choose columns:</label>
-										<select class="form-select" multiple size=2>
-											<option selected value="1">Book Title</option>
-											<option value="2">Author Name</option>
+										<select class="form-select" name="cols[]" multiple="multiple" size=2>
+											<option selected value="book_title">Book Title</option>
+											<option value="author_name">Author Name</option>
 										</select>
 
 										<div class="dropright">

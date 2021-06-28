@@ -39,3 +39,16 @@
 #unsaved{
 	display: none;
 }
+.card-header{
+	position: relative;
+}
+.card-header-div{
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	text-align: right;
+}
+#btn-export{
+	position: absolute;
+	right: 5%;
+}

@@ -8,6 +8,9 @@ $(document).ready(function() {
 		}
 	});
 	$('#sortTable').DataTable({
+		language: {
+			searchPlaceholder: "Search Book title or Author name"
+		},
 		columnDefs: [{
 			orderable: false,
 			targets: 5
@@ -25,6 +28,7 @@ $(document).ready(function() {
 	$(document.body).on('click', '.btn-delete', function(e){
 		if(unsavedChanges > 0){
 			alert("Cannot Delete a record while there are unsaved changes");
+			return;
 		}
 		var row = $(this).closest("tr");
 		var book_title = row.find("td").eq(1).html();
@@ -110,7 +114,7 @@ $(document).ready(function() {
 						$("#unsaved").hide();
 					}
 				}else{
-					alert("Some error occured while deleting this book.");
+					alert("Some error occured while updating the author name.");
 				}
 			}
 		});
