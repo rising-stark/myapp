@@ -7,8 +7,6 @@ use App\Models\Book;
 use App\Models\Author;
 use App\Models\BooksAuthor;
 use Illuminate\Http\Request;
-use App\Exports\BookExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -67,40 +65,7 @@ class BookController extends Controller
 			DB::table('books_authors')->where(['book_title' => $request->book_title, 'author_name' => $request->author_name])->delete();
 			return 1;
 		}catch(Exception $e){
-			return 0;
-		}
-	}
-
-	public function updateAuthor(Request $request){
-		try{
-			DB::table('authors')->where('author_name', $request->old_author_name)->update(['author_name' => $request->new_author_name]);
-			return 1;
-		}catch(Exception $e){
-			return 0;
-		}
-	}
-
-	public function exportTableCSV(Request $request){
-		try{
-
-			//$export_cols_arr = ;
-			return Excel::download(new BookExport($request->input('cols')), 'books.csv');
-		}catch(Exception $e){
-			return 0;
-		}
-	}
-
-	public function exportTableXML(Request $request){
-		try{
-			//error_log($request);
-			/*$export_type_arr = explode (",", substr($request->export_type, 1, -1));
-			$export_cols_arr = explode (",", substr($request->export_cols, 1, -1));
-			
-			foreach($export_cols_arr as $i){
-				error_log($i);
-			}*/
-			return Excel::download(new BookExport, 'books.xlsx');
-		}catch(Exception $e){
+			error_log($e);
 			return 0;
 		}
 	}
