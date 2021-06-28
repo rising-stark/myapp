@@ -85,6 +85,7 @@ $(document).ready(function() {
 	$(document.body).on('click', '.btn-save', function(e){
 		var btn = $(this);
 		var row = $(this).closest("tr");
+		var book_title = row.find("td").eq(1).html();
 		var old_author_name = row.find("td input").eq(1).val();
 		var new_author_name = row.find("td input").eq(0).val();
 		var _token = $("input[name='_token']").val();
@@ -93,6 +94,7 @@ $(document).ready(function() {
 			url: 'ajax-update-author',
 			data: {
 				_token: _token,
+				book_title: book_title,
 				old_author_name: old_author_name,
 				new_author_name: new_author_name
 			},
