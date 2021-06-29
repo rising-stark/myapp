@@ -8,9 +8,8 @@ $(document).ready(function() {
 		}
 	});
 	$('#sortTable').DataTable({
-		dom: 'Bfrtip',
 		language: {
-			searchPlaceholder: "Search Book title or Author name"
+			searchPlaceholder: "Book title/Author name"
 		},
 		columnDefs: [{
 				orderable: false,
@@ -20,9 +19,6 @@ $(document).ready(function() {
 				searchable: false,
 				targets: [0, 3, 4, 5]
 			}
-		],
-		buttons: [
-			'csv', 'excel', 'pdf'
 		]
 	});
 
@@ -129,13 +125,25 @@ $(document).ready(function() {
 
 	$("#exportCurrentTable").click(function(e) {
 		e.preventDefault();
+		var colDict = {
+			book_title: 1,
+			author_name: 2
+		}
 		var data = "";
 		var tableData = [];
 		var rows = $("#sortTable tr");
+		var selectedCols = $("#colSelect").val();
+		var selectedColsArr = [];
+		selectedCols.forEach(function(i){
+			selectedColsArr.push(colDict[i]);
+		})
+
 		rows.each(function(index, row) {
 			var rowData = [];
-			$(row).find("th, td").not(":last").each(function(index, column) {
-				rowData.push(column.innerText);
+			$(row).find("th, td").each(function(index, column) {
+				if(selectedColsArr.includes(index)){
+					rowData.push(column.innerText);
+				}
 			});
 			tableData.push(rowData.join(","));
 		});

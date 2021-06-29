@@ -100,15 +100,21 @@
 								<div id="select-div" class="card-header-div">
 									<form method='POST'>
 										@csrf
-										<label for="columns">Choose columns:</label>
-										<select class="form-select" name="cols[]" multiple="multiple" size=2>
-											<option selected value="book_title">Book Title</option>
-											<option value="author_name">Author Name</option>
-										</select>
+										<div class="card-header-div2">
+											<div id="card-header-div2-label" class="card-header-div3">
+												Choose columns:
+											</div>
+											<div id="card-header-div2-select" class="card-header-div3">
+												<select id="colSelect" class="form-select" name="cols[]" multiple="multiple" size=2>
+													<option selected value="book_title">Book Title</option>
+													<option value="author_name">Author Name</option>
+												</select>
+											</div>
+										</div>
 
-										<div class="dropright">
+										<div class="dropright card-header-div2">
 											<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    	Choose Export Type
+												Choose Export Type
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 												<button formaction="{{route('ajax.table.export.csv')}}" type="submit" class="dropdown-item btn btn-primary">Export CSV&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export"></i></button>
@@ -123,7 +129,7 @@
 								<h4 class="text-danger text-center"><u>NO BOOKS FOUND!!</u></h4>
 							</div>
 							<div class="card-body table-responsive" id="book">
-								<table class="table table-hover table-bordered" id="sortTable">
+								<table class="table table-sm table-hover table-bordered" id="sortTable">
 									<thead class="thead-dark">
 										<tr>
 											<th>Sl. No.</th>
@@ -143,7 +149,7 @@
 												<td>{{$book->author_name}}</td>
 												<td>{{$book->book_pages}}</td>
 												<td>{{$book->book_year_published}}</td>
-												<td><button type="button" class="btn btn-warning btn-update">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger btn-delete">Delete</button></td>
+												<td><button type="button" class="btn btn-warning btn-update btn-sm">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger btn-delete btn-sm">Delete</button></td>
 											</tr>
 										@endforeach
 									</tbody>

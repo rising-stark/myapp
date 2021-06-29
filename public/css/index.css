@@ -19,16 +19,15 @@
 }
 
 #showbook{
-	padding-top:10px;
+	padding-top:20px;
 }
 
 #showbook #no-book, #no-book-search{
 	display: none;
-
 }
 
 .table-responsive {
-	max-height:200px;
+	max-height:300px;
 }
 
 #addbook .card-body .control-label::after{
@@ -39,16 +38,31 @@
 #unsaved{
 	display: none;
 }
-.card-header{
-	position: relative;
-}
 .card-header-div{
 	position: relative;
 	display: inline-block;
-	width: 50%;
 	text-align: right;
+	width: 50%;
 }
-#btn-export{
+.card-header{
+	padding: 5px 10px;
+}
+.card-body{
+	padding: 10px 15px;
+}
+.card-header-div2{
+	display: inline-block;
+}
+.card-header-div3{
 	position: absolute;
-	right: 5%;
+	display: inline-block;
+}
+#card-header-div2-select{
+	right: 35%;
+	top: -10%;
+	z-index: 4;
+}
+#card-header-div2-label{
+	top: 15%;
+	right: 60%;
 }
